@@ -194,6 +194,14 @@ func TestCalcMillionRateRevert(t *testing.T) {
 			},
 			want: 9000,
 		},
+		{
+			name: "base=10000, rate=10000",
+			args: args{
+				base: 10000,
+				rate: 10000,
+			},
+			want: 0,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
