@@ -291,6 +291,9 @@ func CalcMillionRateBoth64(base, rate int64) int64 {
 
 // CalcMillionRateRevert 万分比加成计算, 越加越小
 func CalcMillionRateRevert(base, rate int64) int64 {
+	if rate >= 10000 {
+		return 0
+	}
 	return ((10000 - rate) * base) / 10000
 }
 
