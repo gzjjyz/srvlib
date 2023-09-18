@@ -2,7 +2,6 @@ package utils
 
 import (
 	"crypto/md5"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -279,42 +278,27 @@ func GetSrcServerByActorId(actorId uint64) uint32 {
 	return uint32(Low16(tmp))
 }
 
-// CalcMillionRate 万分比计算
+// CalcMillionRate 万分比加成计算
 func CalcMillionRate(base, rate uint32) uint32 {
-	return uint32(math.Ceil(float64(base) * (float64(rate) / 10000)))
+	return (10000 + rate) * base / 10000
 }
 
-// CalcMillionRate 万分比加成计算
-func CalcMillionAddRate(base, rate uint32) uint32 {
-	return uint32(math.Ceil(float64(base) * (float64(rate)/10000 + 1)))
-}
-
-// CalcMillionRate 万分比计算
 func CalcMillionRate64(base, rate int64) int64 {
-	return int64(math.Ceil(float64(base) * (float64(rate) / 10000)))
+	return (10000 + rate) * base / 10000
 }
 
-// CalcMillionRate 万分比加成计算
-func CalcMillionAddRate64(base, rate int64) int64 {
-	return int64(math.Ceil(float64(base) * (float64(rate)/10000 + 1)))
+func CalcMillionRateBoth64(base, rate int64) int64 {
+	return (10000 + rate) * base / 10000
 }
 
 // CalcMillionRateRevert 万分比加成计算, 越加越小
-func CalcMillionRateRevert(base, rate int64) (int64, error) {
-	if rate == 0 {
-		return 0, errors.New("rate can`t be zero")
-	}
-	return int64(math.Ceil(float64(base) / (float64(rate) / 10000))), nil
+func CalcMillionRateRevert(base, rate int64) int64 {
+	return ((10000 - rate) * base) / 10000
 }
 
 // CalcBillionRate 百万分比加成计算
 func CalcBillionRate(base, rate uint32) uint32 {
-	return uint32(math.Ceil(float64(base) * (float64(rate) / 1000000)))
-}
-
-// CalcBillionAddRate 百万分比加成计算
-func CalcBillionAddRate(base, rate uint32) uint32 {
-	return uint32(math.Ceil(float64(base) * (float64(rate)/1000000 + 1)))
+	return (1000000 + rate) * base / 1000000
 }
 
 func PanicDebugStack(tag string) {
