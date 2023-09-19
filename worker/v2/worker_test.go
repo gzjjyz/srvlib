@@ -2,13 +2,13 @@ package v2
 
 import (
 	"fmt"
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 	"testing"
 	"time"
 )
 
 func TestWorker(t *testing.T) {
-	logger.InitLogger("test")
+	logger.InitLogger(logger.WithAppName("test"))
 	worker := NewWorker(100, func() {
 		fmt.Println("abc")
 	})

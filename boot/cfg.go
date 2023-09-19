@@ -2,7 +2,7 @@ package boot
 
 import (
 	"github.com/995933447/confloader"
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 	"github.com/gzjjyz/srvlib/utils"
 	"time"
 )

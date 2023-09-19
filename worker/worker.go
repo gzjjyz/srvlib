@@ -8,8 +8,8 @@ package worker
 
 import (
 	"fmt"
+	"github.com/gzjjyz/logger"
 	"github.com/gzjjyz/srvlib/alg/queue_list"
-	"github.com/gzjjyz/srvlib/logger"
 	"github.com/gzjjyz/srvlib/utils"
 	"log"
 	"sync/atomic"

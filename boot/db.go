@@ -2,9 +2,10 @@ package boot
 
 import (
 	"errors"
+	"github.com/gzjjyz/logger"
+
 	"github.com/gzjjyz/micro/env"
 	"github.com/gzjjyz/srvlib/db"
-	"github.com/gzjjyz/srvlib/logger"
 )
 
 const (

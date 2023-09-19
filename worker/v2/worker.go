@@ -1,7 +1,7 @@
 package v2
 
 import (
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 	"github.com/gzjjyz/srvlib/trace"
 	"github.com/gzjjyz/srvlib/utils"
 	work "github.com/gzjjyz/srvlib/worker"

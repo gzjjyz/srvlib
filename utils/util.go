@@ -15,7 +15,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 	"github.com/huandu/go-clone"
 	jsoniter "github.com/json-iterator/go"
 )

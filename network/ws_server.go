@@ -3,7 +3,7 @@ package network
 import (
 	"crypto/tls"
 	"github.com/gorilla/websocket"
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 	"net"
 	"net/http"
 	"sync"

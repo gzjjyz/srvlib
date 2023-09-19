@@ -9,7 +9,7 @@ package pb3
 import (
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/snappy"
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 )
 
 const PrintError = true

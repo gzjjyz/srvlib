@@ -3,7 +3,7 @@ package network
 import (
 	"errors"
 	"github.com/gorilla/websocket"
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 	"net"
 	"sync"
 )

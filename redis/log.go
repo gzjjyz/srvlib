@@ -3,7 +3,7 @@ package redis
 import (
 	"context"
 	"github.com/995933447/log-go"
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 )
 
 var Logger *log.Logger

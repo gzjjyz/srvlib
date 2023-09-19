@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	log "github.com/gzjjyz/srvlib/logger"
+	log "github.com/gzjjyz/logger"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/utils"

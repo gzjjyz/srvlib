@@ -11,7 +11,7 @@ import (
 	"github.com/petermattis/goid"
 	"runtime"
 
-	"github.com/gzjjyz/srvlib/logger"
+	"github.com/gzjjyz/logger"
 )
 
 // ProtectRun 保护方式允许一个函数
