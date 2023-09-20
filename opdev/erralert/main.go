@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/gzjjyz/logger"
 	"io"
 	"net/http"
 	"os"
@@ -12,16 +13,30 @@ import (
 	"time"
 )
 
+func initScanTempList() []string {
+	// 参考 json 化日志结构 {"level":3,"timestamp":"09-20 15:59:58.8011","app_name":"gameserver","content":"The processing time exceeds two milliseconds!! 3.792248ms (2, 64)","trace_id":"UNKNOWN","file":"jjyz/gameserver/logicworker/entity/player.go","line":951,"func":"(*Player).DoNetMsg","prefix":"[srv:100 pf:1]","stack":""}
+	var temp = "{\"level\":%d,"
+	var scanTempList []string
+	for i := logger.ErrorLevel; i <= logger.FatalLevel; i++ {
+		scanTempList = append(scanTempList, fmt.Sprintf(temp, i))
+	}
+	return scanTempList
+}
+
 func main() {
+	tempList := initScanTempList()
 	in := make(chan string)
 	out := make(chan string)
 	go func() {
 		for {
 			select {
 			case s := <-in:
-				// 参考 json 化日志结构 {"level":3,"timestamp":"09-20 15:59:58.8011","app_name":"gameserver","content":"The processing time exceeds two milliseconds!! 3.792248ms (2, 64)","trace_id":"UNKNOWN","file":"jjyz/gameserver/logicworker/entity/player.go","line":951,"func":"(*Player).DoNetMsg","prefix":"[srv:100 pf:1]","stack":""}
-				if strings.HasPrefix(s, "{\"level\":4,") {
+				for _, temp := range tempList {
+					if !strings.HasPrefix(s, temp) {
+						continue
+					}
 					out <- s
+					break
 				}
 			}
 		}
