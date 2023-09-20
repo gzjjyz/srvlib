@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 	"time"
 )
@@ -104,7 +105,7 @@ func main() {
 		reOpenFiles()
 
 		for fname, seek := range mapFNameToSeek {
-			f, err := os.Open(os.Getenv("TLOGDIR") + fname)
+			f, err := os.Open(path.Join(os.Getenv("TLOGDIR"), fname))
 			if err != nil {
 				fmt.Println(err)
 				continue
