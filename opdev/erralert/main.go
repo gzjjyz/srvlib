@@ -19,7 +19,8 @@ func main() {
 		for {
 			select {
 			case s := <-in:
-				if strings.Contains(s, "[Error]") {
+				// 参考 json 化日志结构 {"level":3,"timestamp":"09-20 15:59:58.8011","app_name":"gameserver","content":"The processing time exceeds two milliseconds!! 3.792248ms (2, 64)","trace_id":"UNKNOWN","file":"jjyz/gameserver/logicworker/entity/player.go","line":951,"func":"(*Player).DoNetMsg","prefix":"[srv:100 pf:1]","stack":""}
+				if strings.HasPrefix(s, "{\"level\":4,") {
 					out <- s
 				}
 			}
