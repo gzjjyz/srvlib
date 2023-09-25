@@ -7,7 +7,7 @@
 package utils
 
 import (
-	"github.com/gzjjyz/srvlib/trace"
+	"github.com/gzjjyz/trace"
 	"github.com/petermattis/goid"
 	"runtime"
 

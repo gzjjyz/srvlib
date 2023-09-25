@@ -3,7 +3,7 @@ package network
 import (
 	"encoding/binary"
 	"errors"
-	"github.com/gzjjyz/srvlib/trace"
+	"github.com/gzjjyz/trace"
 	"github.com/petermattis/goid"
 	"io"
 	"math"

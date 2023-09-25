@@ -2,9 +2,9 @@ package v2
 
 import (
 	"github.com/gzjjyz/logger"
-	"github.com/gzjjyz/srvlib/trace"
 	"github.com/gzjjyz/srvlib/utils"
 	work "github.com/gzjjyz/srvlib/worker"
+	"github.com/gzjjyz/trace"
 	"github.com/petermattis/goid"
 	"log"
 	"sync"
