@@ -3,7 +3,6 @@ package utils
 import (
 	"crypto/md5"
 	"errors"
-	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -48,9 +47,8 @@ var (
 	isDev bool
 )
 
-func ParseCmdInput() {
-	flag.BoolVar(&isDev, "dev", false, "is it dev now?")
-	flag.Parse()
+func SetDev(flag bool) {
+	isDev = flag
 }
 
 // IsDev 是否开发版本
