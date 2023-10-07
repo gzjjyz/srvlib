@@ -1,0 +1,17 @@
+- 配制 cfg.yaml 文件的内容
+    - 主要有 obs 的配制
+    - 定时执行脚本的配制
+- bk_list 说明：
+    - spec cron 表达式
+    - command 执行脚本
+    - 进入 dir_path 目录找到 ${prefix}*${suffix} 的文件,上传至 obs , 最后删除本地文件
+- bklog.sh 备份日志脚本
+    - 支持修改 BACKUP_PATH 、LastDay 变量
+    - 默认从 ${TLOGDIR} 读取日志文件
+- bkmysql.sh 备份mysql数据库log表脚本
+    - 需要填写数据库的相关配制
+    - 支持修改 BACKUP_PATH 、LastDay 变量
+- 执行 opdev 目录下的脚本 bkcron.sh 即可一键部署
+    - 需要前置部署 supervisor 环境
+    - 需要填写服务器的相关配制
+    - 支持修改 SSH_PARENT_DIR 变量

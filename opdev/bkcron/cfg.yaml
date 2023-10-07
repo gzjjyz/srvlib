@@ -1,0 +1,23 @@
+Cfg:
+  part_size: 1048576
+  obs:
+    access_key: ""
+    secret_key: ""
+    end_point: ""
+    bucket: ""
+    dir: ""
+  bk_list:
+    - spec: "0 0 */7 * *"
+      command: "/home/server/bkcronbiz/bkmysql.sh"
+      upload_obs: true
+      dir_path: "/tmp"
+      prefix: "bksql"
+      suffix: "tar.gz"
+      after_upload_rm: false
+    - spec: "0 0 */7 * *"
+      command: "/home/server/bkcronbiz/bklog.sh"
+      upload_obs: true
+      dir_path: "/tmp/bklog"
+      prefix: "bklog"
+      suffix: "tar.gz"
+      after_upload_rm_dir: false

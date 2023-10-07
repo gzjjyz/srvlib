@@ -3,6 +3,7 @@ HOST=0.0.0.0                             #ip地址
 USER=root                                #数据库用户名
 PASSWORD=game@2023                       #数据库密码
 DATABASE=bk_test                         #数据库名字
+
 BACKUP_PATH=/tmp/bkdata/${DATABASE}      #备份路径
 logfile=/tmp/bkdata/${DATABASE}/data.log #日志路径
 DATE=$(date '+%Y%m%d')                   #当前日期
@@ -79,7 +80,7 @@ bkMysqlTable() {
 # 压缩文件
 tarBkDir() {
   cd /tmp
-  tar -zcvf "bk"_${DATE}"_"${DATABASE}.tar.gz ${BACKUP_PATH}
+  tar -zcvf "bksql"_${DATE}"_"${DATABASE}.tar.gz ${BACKUP_PATH}
 }
 
 # 导入
