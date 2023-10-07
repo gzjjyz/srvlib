@@ -33,11 +33,12 @@ func main() {
 			select {
 			case s := <-in:
 				for _, temp := range tempList {
-					if !strings.HasPrefix(s, temp) {
-						continue
+					if strings.HasPrefix(s, temp) {
+						out <- s
 					}
-					out <- s
-					break
+					if strings.Contains(s, "[Error]") {
+						out <- s
+					}
 				}
 			}
 		}
