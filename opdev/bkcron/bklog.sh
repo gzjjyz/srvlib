@@ -1,5 +1,5 @@
 #!/bin/bash
-SaveLogDir=$TLOGDIR            #日志存放
+SaveLogDir=/data/log/gzjjyz    #日志存放
 DATE=$(date '+%Y%m%d')         #当前日期
 BACKUP_PATH=/tmp/bklog/${DATE} #备份路径
 LastDay=7                      #七天前的都备份
