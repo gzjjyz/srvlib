@@ -1,5 +1,5 @@
 #!/bin/bash
-GTLOGDIR=$TLOGDIR # 重新拿全局日志路径变量
+GTLOGDIR=/data/log/gzjjyz # 重新拿全局日志路径变量
 HOST=192.168.61.231
 USER=server
 SSH_PARENT_DIR=/home/server             # scp 上传的目录
