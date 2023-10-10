@@ -278,15 +278,15 @@ func GetSrcServerByActorId(actorId uint64) uint32 {
 
 // CalcMillionRate 万分比加成计算
 func CalcMillionRate(base, rate uint32) uint32 {
-	return (10000 + rate) * base / 10000
+	return rate * base / 10000
 }
 
 func CalcMillionRate64(base, rate int64) int64 {
-	return (10000 + rate) * base / 10000
+	return rate * base / 10000
 }
 
 func CalcMillionRateBoth64(base, rate int64) int64 {
-	return (10000 + rate) * base / 10000
+	return rate * base / 10000
 }
 
 // CalcMillionRateRevert 万分比加成计算, 越加越小
