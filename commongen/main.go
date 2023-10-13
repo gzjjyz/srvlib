@@ -239,32 +239,32 @@ import (
 
 var loadTempStr = `
 
-var CommonConfMgr *CommonStConf
+var CommonStConfMgr *CommonStConf
 
 // 增强配制表结构
 func LoadCommonStConf() bool {
 	tmp := new(CommonStConf)
-	file := utils.GetCurrentDir() + "config/" + strings.ToLower("CommonConfig") + ".json"
+	filePath := utils.GetCurrentDir() + "config/" + strings.ToLower("CommonConfig") + ".json"
 
 	jsonTmp := make(map[string]map[string]interface{})
-	data, err := os.ReadFile(file)
+	data, err := os.ReadFile(filePath)
 	if err != nil {
-		fmt.Printf("未找到配置文件数据:[%s] %s\n", path.Join(global.CommonJsonPath, global.CommonJsonName), err)
+		fmt.Printf("未找到配置文件数据:[%s] %s\n", filePath, err)
 		return false
 	}
 	if err := jsoniter.Unmarshal(data, &jsonTmp); err != nil {
-		fmt.Printf("load %s Unmarshal json error:%s\n", path.Join(global.CommonJsonPath, global.CommonJsonName), err)
+		fmt.Printf("load %s Unmarshal json error:%s\n", filePath, err)
 		return false
 	}
 
 	initJsonDataToSt(jsonTmp, tmp)
 
-	CommonConfMgr = tmp
+	CommonStConfMgr = tmp
 	return true
 }
 
 func GetCommonStConf() (*CommonStConf, bool) {
-	return CommonConfMgr, CommonConfMgr != nil
+	return CommonStConfMgr, CommonStConfMgr != nil
 }
 
 // 手动 将 json 数据赋值
