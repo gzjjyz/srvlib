@@ -1,0 +1,7 @@
+Cfg:
+  common_json_path: "" // 通用表 JSON 所在文件夹
+  common_json_name: "" // 通用表 JSON 文件名
+  output_st_path: ""   // 生成结构体路径
+  output_st_name: ""   // 生成结构体文件名
+  pkg_name: "jsondata" // 包名
+  type_flag: "type"    // 类型标识 - 没有表示不需要后端生成, 只支持组合:基本类型,数组
