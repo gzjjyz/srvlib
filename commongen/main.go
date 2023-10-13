@@ -307,14 +307,13 @@ func initJsonDataToSt(jsonTmp map[string]map[string]interface{}, tmp *CommonStCo
 			case reflect.Slice:
 				// 目前只有 uint32
 				if k == "u32Vec" {
-					array := strings.Split(fmt.Sprintf("%v", v), ",")
-					intList := make([]uint32, 0, len(array))
-					for i := 0; i < len(array); i++ {
-						intVal, err := strconv.ParseInt(array[i], 10, 32)
-						if err != nil {
-							continue
-						}
-						intList = append(intList, uint32(intVal))
+					vslice, ok := v.([]interface{})
+					if !ok {
+						continue
+					}
+					intList := make([]uint32, 0, len(vslice))
+					for i := 0; i < len(vslice); i++ {
+						intList = append(intList, utils.AtoUint32(fmt.Sprintf("%v", vslice[i])))
 					}
 					vStField.Set(reflect.ValueOf(intList))
 				}
