@@ -11,7 +11,7 @@ require (
 	github.com/golang/protobuf v1.5.3
 	github.com/golang/snappy v0.0.4
 	github.com/gorilla/websocket v1.5.0
-	github.com/gzjjyz/micro v0.0.3-0.20230517081221-6a5a17093396
+	github.com/gzjjyz/micro v0.0.5-0.20231016033527-908637979b70
 	github.com/gzjjyz/trace v0.0.0-20230831064247-64e42e91ac5d
 	github.com/huandu/go-clone v1.6.0
 	github.com/huaweicloud/huaweicloud-sdk-go-obs v3.23.9+incompatible

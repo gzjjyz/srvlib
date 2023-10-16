@@ -153,8 +153,8 @@ github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWm
 github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/gzjjyz/logger v0.0.0-20230920094950-cea8501bbdc7 h1:iEIDiuCpZ0FfQfKagof+CeyszyCCaeUQ/lgnsVX+3As=
 github.com/gzjjyz/logger v0.0.0-20230920094950-cea8501bbdc7/go.mod h1:gprPXTGx81jPjvyzlmtAXXipb19GljNksgvb/RfBhHI=
-github.com/gzjjyz/micro v0.0.3-0.20230517081221-6a5a17093396 h1:JIxRSY7+RCAZKXLL0vNtHc4G/saU0Q49VvNAzDpZXwc=
-github.com/gzjjyz/micro v0.0.3-0.20230517081221-6a5a17093396/go.mod h1:gsMp04RfOnpuYPFjqcq9aQ++gAnafbxbrse6DdxHu0U=
+github.com/gzjjyz/micro v0.0.5-0.20231016033527-908637979b70 h1:rVvu+WeXTKJ4Jv9kGQoP5a3Sc+W6v0z+HV9wvvsJOHA=
+github.com/gzjjyz/micro v0.0.5-0.20231016033527-908637979b70/go.mod h1:RW1gg2ugc2Gm0jZfVqLMmkrgy0mlcKUiwedqkH8jxpw=
 github.com/gzjjyz/trace v0.0.0-20230831064247-64e42e91ac5d h1:PTnoIySa/HfBhvpT+S0AehoMGpiT+BTQF+xomG1ypkQ=
 github.com/gzjjyz/trace v0.0.0-20230831064247-64e42e91ac5d/go.mod h1:FOo0hrIPxyN2/x/MYlMKng+N+Wh+HehilHVHugYpNH4=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
