@@ -2,8 +2,6 @@ module github.com/gzjjyz/srvlib
 
 go 1.20
 
-replace github.com/gzjjyz/logger => /home/yangqibin/jiugong/logger
-
 require (
 	github.com/995933447/confloader v0.0.0-20230314141707-e7b191386ae2
 	github.com/995933447/gonetutil v0.0.0-20230517070832-763d0c3b1d7e
@@ -64,7 +62,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/gzjjyz/logger v0.0.0-20230920094950-cea8501bbdc7
+	github.com/gzjjyz/logger v1.0.1
 	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
