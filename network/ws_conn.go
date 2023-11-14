@@ -2,10 +2,11 @@ package network
 
 import (
 	"errors"
-	"github.com/gorilla/websocket"
-	"github.com/gzjjyz/logger"
 	"net"
 	"sync"
+
+	"github.com/gorilla/websocket"
+	"github.com/gzjjyz/logger"
 )
 
 type WebsocketConnSet map[*websocket.Conn]struct{}
@@ -75,7 +76,7 @@ func (wsConn *WSConn) Close() {
 
 func (wsConn *WSConn) doWrite(b []byte) {
 	if len(wsConn.writeChan) == cap(wsConn.writeChan) {
-		logger.Errorf("close conn: channel full")
+		logger.LogError("close conn: channel full")
 		wsConn.doDestroy()
 		return
 	}

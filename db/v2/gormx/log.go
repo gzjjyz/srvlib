@@ -4,11 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	log "github.com/gzjjyz/logger"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/utils"
-	"time"
 )
 
 type Logger struct {
@@ -32,15 +33,15 @@ func (l *Logger) LogMode(_ logger.LogLevel) logger.Interface {
 }
 
 func (l *Logger) Info(_ context.Context, format string, args ...interface{}) {
-	log.Info(format, args...)
+	log.LogInfo(format, args...)
 }
 
 func (l *Logger) Warn(_ context.Context, format string, args ...interface{}) {
-	log.Warn(format, args...)
+	log.LogWarn(format, args...)
 }
 
 func (l *Logger) Error(_ context.Context, format string, args ...interface{}) {
-	log.Errorf(format, args...)
+	log.LogError(format, args...)
 }
 
 func (l *Logger) Trace(ctx context.Context, begin time.Time, fc func() (sql string, rowsAffected int64), err error) {

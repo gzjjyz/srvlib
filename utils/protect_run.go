@@ -7,9 +7,10 @@
 package utils
 
 import (
+	"runtime"
+
 	"github.com/gzjjyz/trace"
 	"github.com/petermattis/goid"
-	"runtime"
 
 	"github.com/gzjjyz/logger"
 )
@@ -28,9 +29,9 @@ func ProtectRun(fn func()) {
 		}
 		switch err.(type) {
 		case runtime.Error: // 运行时错误
-			logger.Stack("runtime error:%v", err)
+			logger.LogStack("runtime error:%v", err)
 		default: // 非运行时错误
-			logger.Stack("error:%v", err)
+			logger.LogStack("error:%v", err)
 		}
 	}()
 	fn()

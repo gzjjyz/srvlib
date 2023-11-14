@@ -5,9 +5,9 @@ import (
 )
 
 func SafeLogErr(err error, printWhileLoggerNoReady bool) {
-	logger.Errorf(err.Error())
+	logger.LogError(err.Error())
 }
 
 func SafeLogWarn(printWhileLoggerNoReady bool, format string, args ...interface{}) {
-	logger.Warn(format, args...)
+	logger.LogWarn(format, args...)
 }

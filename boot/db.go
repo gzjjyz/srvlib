@@ -2,6 +2,7 @@ package boot
 
 import (
 	"errors"
+
 	"github.com/gzjjyz/logger"
 
 	"github.com/gzjjyz/micro/env"
@@ -19,12 +20,12 @@ func InitOrmMysql(connName string) error {
 	connCfg, ok := env.MustMeta().DBConnections.GetMysqlConn(connName)
 	if !ok {
 		err := errors.New("mysql connection config not found")
-		logger.Errorf(err.Error())
+		logger.LogError(err.Error())
 		return err
 	}
 
 	if err := db.InitOrmMysqlV2(connCfg.User, connCfg.Password, connCfg.Host, connCfg.Port, connCfg.Databases); err != nil {
-		logger.Errorf(err.Error())
+		logger.LogError(err.Error())
 		return err
 	}
 

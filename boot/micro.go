@@ -4,6 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net"
+	"net/http"
+	_ "net/http/pprof"
+
 	"github.com/995933447/gonetutil"
 	"github.com/gzjjyz/logger"
 	"github.com/gzjjyz/micro"
@@ -13,9 +17,6 @@ import (
 	"github.com/gzjjyz/srvlib/pb3/health"
 	"github.com/gzjjyz/srvlib/utils"
 	"google.golang.org/grpc"
-	"net"
-	"net/http"
-	_ "net/http/pprof"
 )
 
 func InitMicroSuiteWithGrpc(ctx context.Context, metaFilePath string) error {
@@ -29,19 +30,19 @@ func ServeGrpc(ctx context.Context, srvName string, ipVar string, port, pprofPor
 	go func() {
 		err := http.ListenAndServe(fmt.Sprintf("127.0.0.1:%d", pprofPort), nil)
 		if err != nil {
-			logger.Errorf(err.Error())
+			logger.LogError(err.Error())
 		}
 	}()
 
 	ip, err := utils.EvalVarToParseIp(ipVar)
 	if err != nil {
-		logger.Errorf(err.Error())
+		logger.LogError(err.Error())
 		return err
 	}
 
 	nodeExtra, err := json.Marshal(&health.NodeHealthDesc{})
 	if err != nil {
-		logger.Errorf(err.Error())
+		logger.LogError(err.Error())
 		return err
 	}
 	node := discovery.NewNode(ip, port)
@@ -64,7 +65,7 @@ func ServeGrpc(ctx context.Context, srvName string, ipVar string, port, pprofPor
 	defer func() {
 		err = discover.Unregister(ctx, srvName, node, true)
 		if err != nil {
-			logger.Errorf(err.Error())
+			logger.LogError(err.Error())
 		}
 	}()
 	err = discover.Register(ctx, srvName, node)
@@ -99,13 +100,13 @@ func ServeGrpcV2(ctx context.Context, req *ServeGrpcReq) error {
 		go func() {
 			ip, err := gonetutil.EvalVarToParseIp(req.PProfIpVar)
 			if err != nil {
-				logger.Errorf("%v", err)
+				logger.LogError("%v", err)
 				return
 			}
 
 			err = http.ListenAndServe(fmt.Sprintf("%s:%d", ip, req.PProfPort), nil)
 			if err != nil {
-				logger.Errorf("%v", err)
+				logger.LogError("%v", err)
 			}
 		}()
 	}
@@ -157,7 +158,7 @@ func ServeGrpcV2(ctx context.Context, req *ServeGrpcReq) error {
 	defer func() {
 		err = discover.Unregister(ctx, req.SrvName, node, true)
 		if err != nil {
-			logger.Errorf("%v", err)
+			logger.LogError("%v", err)
 		}
 	}()
 

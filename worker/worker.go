@@ -8,12 +8,13 @@ package worker
 
 import (
 	"fmt"
-	"github.com/gzjjyz/logger"
-	"github.com/gzjjyz/srvlib/alg/queue_list"
-	"github.com/gzjjyz/srvlib/utils"
 	"log"
 	"sync/atomic"
 	"time"
+
+	"github.com/gzjjyz/logger"
+	"github.com/gzjjyz/srvlib/alg/queue_list"
+	"github.com/gzjjyz/srvlib/utils"
 )
 
 type MsgHdlType func(param ...interface{})
@@ -135,7 +136,7 @@ func (worker *Worker) StopGate() {
 func (worker *Worker) loop() {
 	defer func() {
 		if err := recover(); err != nil {
-			logger.Stack("循环中出现错误:%v", err)
+			logger.LogStack("循环中出现错误:%v", err)
 		}
 	}()
 
@@ -158,7 +159,7 @@ func (worker *Worker) ProcessMsg() {
 				})
 			}
 			if since := time.Since(t); since > 20*time.Millisecond {
-				logger.Debug("process msg end! id:%d, cost:%v", msg.MsgId, since)
+				logger.LogDebug("process msg end! id:%d, cost:%v", msg.MsgId, since)
 			}
 		}
 	})

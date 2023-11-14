@@ -1,10 +1,11 @@
 package network
 
 import (
-	"github.com/gzjjyz/logger"
 	"net"
 	"sync"
 	"time"
+
+	"github.com/gzjjyz/logger"
 )
 
 type TCPServer struct {
@@ -34,19 +35,19 @@ func (server *TCPServer) Start() {
 func (server *TCPServer) init() {
 	ln, err := net.Listen("tcp", server.Addr)
 	if err != nil {
-		logger.Fatalf("%v", err)
+		logger.LogFatal("%v", err)
 	}
 
 	if server.MaxConnNum <= 0 {
 		server.MaxConnNum = 100
-		logger.Info("invalid MaxConnNum, reset to %v", server.MaxConnNum)
+		logger.LogInfo("invalid MaxConnNum, reset to %v", server.MaxConnNum)
 	}
 	if server.PendingWriteNum <= 0 {
 		server.PendingWriteNum = 100
-		logger.Info("invalid PendingWriteNum, reset to %v", server.PendingWriteNum)
+		logger.LogInfo("invalid PendingWriteNum, reset to %v", server.PendingWriteNum)
 	}
 	if server.NewAgent == nil {
-		logger.Fatalf("NewAgent must not be nil")
+		logger.LogFatal("NewAgent must not be nil")
 	}
 
 	server.ln = ln
@@ -76,7 +77,7 @@ func (server *TCPServer) run() {
 				if max := 1 * time.Second; tempDelay > max {
 					tempDelay = max
 				}
-				logger.Errorf("accept error: %v; retrying in %v", err, tempDelay)
+				logger.LogError("accept error: %v; retrying in %v", err, tempDelay)
 				time.Sleep(tempDelay)
 				continue
 			}
@@ -88,7 +89,7 @@ func (server *TCPServer) run() {
 		if len(server.conns) >= server.MaxConnNum {
 			server.mutexConns.Unlock()
 			conn.Close()
-			logger.Debug("too many connections")
+			logger.LogDebug("too many connections")
 			continue
 		}
 		server.conns[conn] = struct{}{}

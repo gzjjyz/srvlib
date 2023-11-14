@@ -1,10 +1,11 @@
 package network
 
 import (
-	"github.com/gorilla/websocket"
-	"github.com/gzjjyz/logger"
 	"sync"
 	"time"
+
+	"github.com/gorilla/websocket"
+	"github.com/gzjjyz/logger"
 )
 
 type WSClient struct {
@@ -38,29 +39,29 @@ func (client *WSClient) init() {
 
 	if client.ConnNum <= 0 {
 		client.ConnNum = 1
-		logger.Info("invalid ConnNum, reset to %v", client.ConnNum)
+		logger.LogInfo("invalid ConnNum, reset to %v", client.ConnNum)
 	}
 	if client.ConnectInterval <= 0 {
 		client.ConnectInterval = 3 * time.Second
-		logger.Info("invalid ConnectInterval, reset to %v", client.ConnectInterval)
+		logger.LogInfo("invalid ConnectInterval, reset to %v", client.ConnectInterval)
 	}
 	if client.PendingWriteNum <= 0 {
 		client.PendingWriteNum = 100
-		logger.Info("invalid PendingWriteNum, reset to %v", client.PendingWriteNum)
+		logger.LogInfo("invalid PendingWriteNum, reset to %v", client.PendingWriteNum)
 	}
 	if client.MaxMsgLen <= 0 {
 		client.MaxMsgLen = 4096
-		logger.Info("invalid MaxMsgLen, reset to %v", client.MaxMsgLen)
+		logger.LogInfo("invalid MaxMsgLen, reset to %v", client.MaxMsgLen)
 	}
 	if client.HandshakeTimeout <= 0 {
 		client.HandshakeTimeout = 10 * time.Second
-		logger.Info("invalid HandshakeTimeout, reset to %v", client.HandshakeTimeout)
+		logger.LogInfo("invalid HandshakeTimeout, reset to %v", client.HandshakeTimeout)
 	}
 	if client.NewAgent == nil {
-		logger.Fatalf("NewAgent must not be nil")
+		logger.LogFatal("NewAgent must not be nil")
 	}
 	if client.conns != nil {
-		logger.Fatalf("client is running")
+		logger.LogFatal("client is running")
 	}
 
 	client.conns = make(WebsocketConnSet)
@@ -77,7 +78,7 @@ func (client *WSClient) dial() *websocket.Conn {
 			return conn
 		}
 
-		logger.Errorf("connect to %v error: %v", client.Addr, err)
+		logger.LogError("connect to %v error: %v", client.Addr, err)
 		time.Sleep(client.ConnectInterval)
 		continue
 	}

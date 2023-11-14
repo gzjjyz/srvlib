@@ -2,6 +2,8 @@ module github.com/gzjjyz/srvlib
 
 go 1.20
 
+replace github.com/gzjjyz/logger => /home/yangqibin/jiugong/logger
+
 require (
 	github.com/995933447/confloader v0.0.0-20230314141707-e7b191386ae2
 	github.com/995933447/gonetutil v0.0.0-20230517070832-763d0c3b1d7e

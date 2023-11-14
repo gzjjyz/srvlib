@@ -6,11 +6,11 @@ func Benchmark(b *testing.B) {
 	tree := Tree{}
 
 	for i := 0; i < b.N; i++ {
-		tree.Insert(100, int32(i))
+		tree.Insert(100, uint64(i))
 	}
 
 	for i := 0; i < b.N; i++ {
-		tree.Locate(100, int32(i))
+		tree.Locate(100, uint64(i))
 	}
 }
 
@@ -20,13 +20,13 @@ func TestDos(t *testing.T) {
 	N := 500
 	t.Log("testing tree.Insert()")
 	for i := 0; i < N; i++ {
-		tree.Insert(int32(i), int32(N-i))
+		tree.Insert(uint32(i), uint64(N-i))
 	}
 	t.Log("Count:", tree.Count())
 
 	t.Log("testing tree.Locate()")
 	for i := 0; i < N; i++ {
-		rank, node := tree.Locate(int32(i), int32(N-i))
+		rank, node := tree.Locate(uint32(i), uint64(N-i))
 		if node != nil {
 			t.Log("id:", N-i, "score:", i, "rank:", rank, "ids", node.ids)
 		}
@@ -58,8 +58,8 @@ func TestDos(t *testing.T) {
 
 	t.Log("testing tree.Locate()")
 	for i := 0; i < N; i++ {
-		rank, n := tree.Locate(int32(i), int32(20-i))
-		if rank != -1 {
+		rank, n := tree.Locate(uint32(i), uint64(20-i))
+		if rank != 0 {
 			t.Logf("score %v, ids %v rank %v \n", n.Score(), n.Ids(), rank)
 		}
 	}

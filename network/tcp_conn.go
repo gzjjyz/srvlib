@@ -1,9 +1,10 @@
 package network
 
 import (
-	"github.com/gzjjyz/logger"
 	"net"
 	"sync"
+
+	"github.com/gzjjyz/logger"
 )
 
 type ConnSet map[net.Conn]struct{}
@@ -73,7 +74,7 @@ func (tcpConn *TCPConn) Close() {
 
 func (tcpConn *TCPConn) doWrite(b []byte) {
 	if len(tcpConn.writeChan) == cap(tcpConn.writeChan) {
-		logger.Debug("close conn: channel full")
+		logger.LogDebug("close conn: channel full")
 		tcpConn.doDestroy()
 		return
 	}

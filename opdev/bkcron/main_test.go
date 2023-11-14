@@ -2,31 +2,32 @@ package main
 
 import (
 	"fmt"
-	"github.com/gzjjyz/logger"
-	"github.com/huaweicloud/huaweicloud-sdk-go-obs/obs"
 	"os"
 	"path"
 	"strings"
 	"testing"
+
+	"github.com/gzjjyz/logger"
+	"github.com/huaweicloud/huaweicloud-sdk-go-obs/obs"
 )
 
 func Test_upload(t *testing.T) {
 	logger.InitLogger()
 	err := loadGlobal()
 	if err != nil {
-		logger.Errorf("err:%v", err)
+		logger.LogError("err:%v", err)
 		return
 	}
 	obsClient, err = obs.New(global.Obs.AccessKey, global.Obs.SecretKey, global.Obs.EndPoint)
 	if err != nil {
-		logger.Errorf("err:%v", err)
+		logger.LogError("err:%v", err)
 		return
 	}
 
 	vo := global.BkList[1]
 	files, err := os.ReadDir(vo.DirPath)
 	if err != nil {
-		logger.Errorf("err:%v", err)
+		logger.LogError("err:%v", err)
 		return
 	}
 
@@ -42,7 +43,7 @@ func Test_upload(t *testing.T) {
 	}
 
 	if len(backupLogs) == 0 {
-		logger.Info("not found backup file")
+		logger.LogInfo("not found backup file")
 		return
 	}
 
@@ -50,13 +51,13 @@ func Test_upload(t *testing.T) {
 	for _, file := range backupLogs {
 		err := upload(global.Obs.Bucket, file.Name(), path.Join(vo.DirPath, file.Name()))
 		if err != nil {
-			logger.Errorf("err:%v", err)
+			logger.LogError("err:%v", err)
 			continue
 		}
 
 		if vo.AfterUploadRm {
 			if err = os.Remove(path.Join(vo.DirPath, file.Name())); err != nil {
-				logger.Errorf("del %s file fail,err:%v", path.Join(vo.DirPath, file.Name()), err)
+				logger.LogError("del %s file fail,err:%v", path.Join(vo.DirPath, file.Name()), err)
 			}
 		}
 	}
@@ -66,7 +67,7 @@ func Test_bucket(t *testing.T) {
 	logger.InitLogger()
 	err := loadGlobal()
 	if err != nil {
-		logger.Errorf("err:%v", err)
+		logger.LogError("err:%v", err)
 		return
 	}
 	obsClient, err := obs.New(global.Obs.AccessKey, global.Obs.SecretKey, global.Obs.EndPoint)

@@ -1,10 +1,11 @@
 package boot
 
 import (
+	"time"
+
 	"github.com/995933447/confloader"
 	"github.com/gzjjyz/logger"
 	"github.com/gzjjyz/srvlib/utils"
-	"time"
 )
 
 type RpcSrvCfg struct {
@@ -25,7 +26,7 @@ func InitDynamicCfg(cfgFilePath string, cfg interface{}) error {
 		for {
 			select {
 			case err := <-errCh:
-				logger.Errorf(err.Error())
+				logger.LogError(err.Error())
 			}
 		}
 	})

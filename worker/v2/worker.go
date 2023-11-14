@@ -1,15 +1,16 @@
 package v2
 
 import (
+	"log"
+	"sync"
+	"sync/atomic"
+	"time"
+
 	"github.com/gzjjyz/logger"
 	"github.com/gzjjyz/srvlib/utils"
 	work "github.com/gzjjyz/srvlib/worker"
 	"github.com/gzjjyz/trace"
 	"github.com/petermattis/goid"
-	"log"
-	"sync"
-	"sync/atomic"
-	"time"
 )
 
 const (
@@ -141,7 +142,7 @@ func (w *Worker) StopGate() {
 func (w *Worker) loop() {
 	defer func() {
 		if err := recover(); err != nil {
-			logger.Stack("循环中出现错误:%v", err)
+			logger.LogStack("循环中出现错误:%v", err)
 		}
 	}()
 
@@ -167,7 +168,7 @@ func (w *Worker) ProcessMsg(msgList []*TracedMsg) {
 			})
 		}
 		if since := time.Since(t); since > 20*time.Millisecond {
-			logger.Debug("process msg end! id:%d, cost:%v", msg.MsgId, since)
+			logger.LogDebug("process msg end! id:%d, cost:%v", msg.MsgId, since)
 		}
 	}
 }

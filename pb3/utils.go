@@ -19,7 +19,7 @@ type Message = proto.Message
 func Marshal(m proto.Message) (buf []byte, err error) {
 	buf, err = proto.Marshal(m)
 	if nil != err {
-		logger.StackIf(PrintError, "pb3 Marshal error %v", err)
+		logger.LogStackIf(PrintError, "pb3 Marshal error %v", err)
 	}
 	return
 }
@@ -27,7 +27,7 @@ func Marshal(m proto.Message) (buf []byte, err error) {
 func Unmarshal(b []byte, m proto.Message) (err error) {
 	err = proto.Unmarshal(b, m)
 	if nil != err {
-		logger.StackIf(PrintError, "pb3 Unmarshal error %v", err)
+		logger.LogStackIf(PrintError, "pb3 Unmarshal error %v", err)
 	}
 	return err
 }

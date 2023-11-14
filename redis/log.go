@@ -2,6 +2,7 @@ package redis
 
 import (
 	"context"
+
 	"github.com/995933447/log-go"
 	"github.com/gzjjyz/logger"
 )
@@ -16,17 +17,17 @@ type LoggerWriter struct {
 func (l LoggerWriter) Write(ctx context.Context, level log.Level, format string, args ...interface{}) error {
 	switch level {
 	case log.LevelDebug:
-		logger.Debug(format, args)
+		logger.LogDebug(format, args)
 	case log.LevelInfo:
-		logger.Info(format, args)
+		logger.LogInfo(format, args)
 	case log.LevelWarn:
-		logger.Warn(format, args)
+		logger.LogWarn(format, args)
 	case log.LevelError:
-		logger.Errorf(format, args)
+		logger.LogError(format, args)
 	case log.LevelFatal:
-		logger.Fatalf(format, args)
+		logger.LogFatal(format, args)
 	case log.LevelPanic:
-		logger.Stack(format, args)
+		logger.LogStack(format, args)
 	}
 	return nil
 }

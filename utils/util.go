@@ -28,15 +28,15 @@ func LoadJson(mgr interface{}, module string) bool {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		if IsDev() {
-			logger.Errorf("未找到配置文件数据:[%s] %s", file, err)
+			logger.LogError("未找到配置文件数据:[%s] %s", file, err)
 		} else {
-			logger.Fatalf("未找到配置文件数据:[%s] %s", file, err)
+			logger.LogFatal("未找到配置文件数据:[%s] %s", file, err)
 		}
 		return false
 	}
 
 	if err := jsoniter.Unmarshal(data, mgr); err != nil {
-		logger.Fatalf("load %s Unmarshal json error:%s", file, err)
+		logger.LogFatal("load %s Unmarshal json error:%s", file, err)
 		return false
 	}
 	return true
@@ -304,7 +304,7 @@ func CalcBillionRate(base, rate uint32) uint32 {
 
 func PanicDebugStack(tag string) {
 	if err := recover(); err != nil {
-		logger.Errorf("tag[%s] %+v: %s", tag, err, debug.Stack())
+		logger.LogError("tag[%s] %+v: %s", tag, err, debug.Stack())
 	}
 }
 
