@@ -3,6 +3,7 @@ package network
 import (
 	"net"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/gzjjyz/logger"
@@ -18,7 +19,7 @@ type TCPClient struct {
 	NewAgent        func(*TCPConn) Agent
 	conns           ConnSet
 	wg              sync.WaitGroup
-	closeFlag       bool
+	closeFlag       atomic.Bool
 
 	// msg parser
 	LenMsgLen    int
@@ -61,7 +62,7 @@ func (client *TCPClient) init() {
 	}
 
 	client.conns = make(ConnSet)
-	client.closeFlag = false
+	client.closeFlag.Store(false)
 
 	// msg parser
 	msgParser := NewMsgParser()
@@ -73,7 +74,7 @@ func (client *TCPClient) init() {
 func (client *TCPClient) dial() net.Conn {
 	for {
 		conn, err := net.Dial("tcp", client.Addr)
-		if err == nil || client.closeFlag {
+		if err == nil || client.closeFlag.Load() {
 			return conn
 		}
 
@@ -93,7 +94,7 @@ reconnect:
 	}
 
 	client.Lock()
-	if client.closeFlag {
+	if client.closeFlag.Load() {
 		client.Unlock()
 		conn.Close()
 		return
@@ -120,7 +121,7 @@ reconnect:
 
 func (client *TCPClient) Close() {
 	client.Lock()
-	client.closeFlag = true
+	client.closeFlag.Store(true)
 	for conn := range client.conns {
 		conn.Close()
 	}
