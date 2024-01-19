@@ -10,7 +10,7 @@ func OnSign(fn func(os.Signal), signList ...os.Signal) {
 		return
 	}
 
-	signChan := make(chan os.Signal)
+	signChan := make(chan os.Signal, 1)
 	signal.Notify(signChan, signList...)
 	go func() {
 		for {

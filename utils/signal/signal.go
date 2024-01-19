@@ -6,7 +6,7 @@ import (
 	"syscall"
 )
 
-var signalChan = make(chan os.Signal)
+var signalChan = make(chan os.Signal, 1)
 
 func init() {
 	list := []os.Signal{
