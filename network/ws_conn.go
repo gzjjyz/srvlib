@@ -2,6 +2,7 @@ package network
 
 import (
 	"errors"
+	"github.com/gzjjyz/srvlib/utils"
 	"net"
 	"sync"
 
@@ -13,10 +14,11 @@ type WebsocketConnSet map[*websocket.Conn]struct{}
 
 type WSConn struct {
 	sync.Mutex
-	conn      *websocket.Conn
-	writeChan chan []byte
-	maxMsgLen uint32
-	closeFlag bool
+	conn       *websocket.Conn
+	writeChan  chan []byte
+	maxMsgLen  uint32
+	closeFlag  bool
+	remoteAddr string
 }
 
 func newWSConn(conn *websocket.Conn, pendingWriteNum int, maxMsgLen uint32) *WSConn {
@@ -90,6 +92,19 @@ func (wsConn *WSConn) LocalAddr() net.Addr {
 
 func (wsConn *WSConn) RemoteAddr() net.Addr {
 	return wsConn.conn.RemoteAddr()
+}
+
+func (wsConn *WSConn) SetRemoteAddr(addr string) {
+	wsConn.remoteAddr = addr
+}
+
+func (wsConn *WSConn) RemoteAddrWithoutPort() string {
+	if wsConn.remoteAddr == "" {
+		if vec := utils.StrToStrVec(wsConn.RemoteAddr().String(), ":"); len(vec) > 0 {
+			wsConn.remoteAddr = vec[0]
+		}
+	}
+	return wsConn.remoteAddr
 }
 
 // goroutine not safe

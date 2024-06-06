@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"net"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
@@ -66,6 +67,8 @@ func (handler *WSHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	handler.mutexConns.Unlock()
 
 	wsConn := newWSConn(conn, handler.pendingWriteNum, handler.maxMsgLen)
+	wsConn.SetRemoteAddr(GetWebsocketConnRemoteIP(r))
+
 	agent := handler.newAgent(wsConn)
 	agent.Run()
 
@@ -152,4 +155,13 @@ func (server *WSServer) Close() {
 	server.handler.mutexConns.Unlock()
 
 	server.handler.wg.Wait()
+}
+
+func GetWebsocketConnRemoteIP(r *http.Request) string {
+	ip := r.Header.Get("X-Forwarded-For")
+	if strings.Contains(ip, "127.0.0.1") || ip == "" {
+		ip = r.Header.Get("X-real-ip")
+	}
+
+	return ip
 }
