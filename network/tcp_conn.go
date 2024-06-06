@@ -105,6 +105,9 @@ func (tcpConn *TCPConn) RemoteAddr() net.Addr {
 	return tcpConn.conn.RemoteAddr()
 }
 
+func (tcpConn *TCPConn) RemoteAddrWithoutPort() string {
+	return tcpConn.RemoteAddr().String()
+}
 func (tcpConn *TCPConn) ReadMsg() ([]byte, error) {
 	return tcpConn.msgParser.Read(tcpConn)
 }
