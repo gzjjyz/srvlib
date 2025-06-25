@@ -93,15 +93,20 @@ func (server *TCPServer) run() {
 			continue
 		}
 		server.conns[conn] = struct{}{}
-		server.mutexConns.Unlock()
-
-		server.wgConns.Add(1)
-
 		tcpConn := newTCPConn(conn, server.PendingWriteNum, server.msgParser)
 		agent := server.NewAgent(tcpConn)
+		if agent == nil {
+			conn.Close()
+			delete(server.conns, conn)
+			server.mutexConns.Unlock()
+			logger.LogDebug("agent is nil")
+			continue
+		}
+		server.mutexConns.Unlock()
+		server.wgConns.Add(1)
+
 		go func() {
 			agent.Run()
-
 			// cleanup
 			tcpConn.Close()
 			server.mutexConns.Lock()
