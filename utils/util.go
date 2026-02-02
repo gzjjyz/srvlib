@@ -39,6 +39,9 @@ func LoadJson(mgr interface{}, module string) bool {
 		logger.LogFatal("load %s Unmarshal json error:%s", file, err)
 		return false
 	}
+	if IsDev() {
+		moduleName = append(moduleName, module)
+	}
 	return true
 }
 
